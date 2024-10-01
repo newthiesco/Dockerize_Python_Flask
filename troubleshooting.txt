@@ -12,3 +12,11 @@ wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-k
 echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
 sudo apt-get update
 sudo apt-get install trivy
+
+
+BUILD AND PUSH IMAGE TO DOCKER HUB
+docker build -t flask-app:1.0.0 .
+docker tag flask-app:1.0.0 your-username/flask-app:1.0.0
+docker login
+docker push your-username/flask-app:1.0.0
+
