@@ -1,0 +1,14 @@
+Issues encontered
+After building the docker image, I tried to scan it with trivy but was getting error, related to permission and authorization. tried to solve that by adding user to docker group
+but still getting the error. I did some google research and found out that according to trivy official documentation (https://aquasecurity.github.io/trivy/v0.28.1/getting-started/installation/#docker), when you want scan docker image that you build locally,
+you need to run this command:
+docker run -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image <<imagename>>
+AND THIS SAVED MY DAY!!!
+
+
+INSTALLATION
+sudo apt-get install wget apt-transport-https gnupg lsb-release
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt-get update
+sudo apt-get install trivy	
